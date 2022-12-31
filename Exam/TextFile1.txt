@@ -1,0 +1,5 @@
+﻿bear, 3
+monkey, 4
+bird, 20
+bear, 2
+monkey, 4

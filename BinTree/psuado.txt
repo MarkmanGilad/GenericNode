@@ -1,0 +1,47 @@
+﻿
+
+
+DFS_Stack (node)
+	new stack
+	stack.push (node)
+	while stack is not empty:
+		node = stack.pop
+		print (node)
+		stack.push (node.rightSon)
+		stack.push (node.LeftSon)
+
+BFS (node)
+	new queue
+	queue.insert (node)
+	while queue is not empty:
+		node = queue.remove
+		print (node)
+		queue.unsert (node.LeftSon)
+		queue.insert (node.rightSon)
+		
+BFS_Level (node)
+	new queue
+	level = -1
+	queue.insert (node)
+	while queue is not empty:
+		level++
+		level_size = queue.length
+		while (level_size > 0):
+			node = queue.remove
+			queue.unsert (node.LeftSon)
+			queue.insert (node.rightSon)
+			level_size--;
+	return level
+
+	BFS_Level (node)
+	new queue
+	level = -1
+	queue.insert (node)
+	while queue is not empty:
+		level++
+		level_size = queue.length
+		for i=1 to level_size:
+			node = queue.remove
+			queue.unsert (node.LeftSon)
+			queue.insert (node.rightSon)
+	return level

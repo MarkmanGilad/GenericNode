@@ -1,0 +1,10 @@
+﻿Gilad, English, 85
+Ziv, English, 88
+Hadar, English, 90
+Gilad, Math, 75
+Ziv, Math, 95
+Hadar, Math, 90
+Neta, Computers, 99
+Lior, Computers, 88
+David, Litreture, 78
+Yonathan, Litreture, 80
