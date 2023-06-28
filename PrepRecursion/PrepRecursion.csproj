@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8CE7B12B-CEE5-4A8C-A999-A41EB450E3C5}</ProjectGuid>
+    <ProjectGuid>{38058690-B61F-457F-81D5-58ABAE00CFB7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>QueueExam</RootNamespace>
-    <AssemblyName>QueueExam</AssemblyName>
+    <RootNamespace>PrepRecursion</RootNamespace>
+    <AssemblyName>PrepRecursion</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,7 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MoedB.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

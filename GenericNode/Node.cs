@@ -26,32 +26,26 @@ namespace GenericNode
         {
             return this.value;
         }
-
         public Node<T> GetNext()
         {
             return this.next;
         }
-
         public bool HasNext()
         {
             return (this.next != null);
         }
-
         public override string ToString()
         {
             return this.value.ToString();
         }
-
         public void SetValue(T value)
         {
             this.value = value;
         }
-
         public void SetNext(Node<T> next)
         {
             this.next = next;
         }
-
         public bool Equals(Node<T> node)
         {
             return value.Equals(node.value);

@@ -58,6 +58,7 @@
     <Content Include="psuado.txt" />
     <Content Include="smallTree.txt" />
     <Content Include="tree.txt" />
+    <Content Include="TreeChar.txt" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
