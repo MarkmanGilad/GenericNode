@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GenericNode;
+using Unit4.CollectionsLib;
 
 namespace GenericList
 {
@@ -13,6 +13,7 @@ namespace GenericList
         static Random rnd = new Random(10);
         static void Main(string[] args)
         {
+            int[] arr = { 10, 9, 8 };
             Node<int> head = CreateRandomList(10);
             PrintList(head);
             Node<double> headDouble = CreateRandomListDouble(10);
@@ -28,7 +29,7 @@ namespace GenericList
             node = new Node<int>(200);
             AddLast(head, node);
             PrintList(head);
-            Dell(head, 7);
+            Del(head, 7);
             head = Pop(head);
             PrintList(head);
             Console.WriteLine(Sum(head));
@@ -96,19 +97,19 @@ namespace GenericList
             PrintList(SumOfsubList(l1));
 
             // Bagrot 2010 RangeNode
-            Node<int> h = ReadFromTextFile(@"C:\Users\Gilad\Markman Dropbox\Gilad Markman\הוראה\יסודות\GenericNode\Lesson1\List.txt");
+            Node<int> h = ReadFromTextFile("List.txt");
             PrintList(h);
             PrintList(CreateRangeList(h));
             PrintList(CreateRangeList2(h));
 
             // Bagrot 2020 BuildDigit
-            h = ReadFromTextFile(@"C:\Users\Gilad\Markman Dropbox\Gilad Markman\הוראה\יסודות\GenericNode\Lesson1\List1.txt");
+            h = ReadFromTextFile(@"List1.txt");
             PrintList(h);
             PrintList(BuildDigit(h));
             PrintList(BuildDigit2(h));
 
             // maxSortedSubList
-            h = ReadFromTextFile(@"C:\Users\Gilad\Markman Dropbox\Gilad Markman\הוראה\יסודות\GenericNode\Lesson1\List2.txt");
+            h = ReadFromTextFile("List2.txt");
             PrintList(h);
             Console.WriteLine(maxSortedSubList(h));
             
@@ -146,6 +147,18 @@ namespace GenericList
             }
             return head;
         }
+        public static Node<int> CreateList(int[] arr)
+        {
+            Node<int> head = new Node<int>(0);
+            Node<int> tail = head;
+            for (int i = 0;i < arr.Length;i++)
+            {
+                Node<int> node = new Node<int>(arr[i]);
+                tail.SetNext(node);
+                tail = tail.GetNext();
+            }
+            return head.GetNext();
+        }
         public static Node<string> CreateListStr(int n)
         {
             Random rnd = new Random(100);
@@ -171,6 +184,15 @@ namespace GenericList
             return head;
         }
         public static void PrintList<T>(Node<T> head)
+        {
+            while (head != null)
+            {
+                Console.Write(head + " ");
+                head = head.GetNext();
+            }
+            Console.WriteLine();
+        }
+        public static void PrintList(Node<int> head)
         {
             while (head != null)
             {
@@ -279,16 +301,17 @@ namespace GenericList
             head.SetNext(null);
             return newHead;
         }
-        public static Node<int> Dell(Node<int> head, int n)
+        public static Node<int> Del(Node<int> head, int n)
         {
-            for (int i = 0; i < n - 1; i++)
+            head = new Node<int>(0, head);
+            for (int i = 0; i < n; i++)
             {
                 head = head.GetNext();
             }
             head.SetNext(head.GetNext().GetNext());
-            return head;
+            return head.GetNext();
         }
-        public static Node<T> Dell<T>(Node<T> head, int n)
+        public static Node<T> Del<T>(Node<T> head, int n)
         {
             for (int i = 0; i < n - 1; i++)
             {
@@ -538,9 +561,9 @@ namespace GenericList
                     {
                         newList = new Node<T>(l1.GetValue(), newList);
                         int index = Index(l1_copy, l1.GetValue());
-                        l1_copy = Dell(l1_copy, index);
+                        l1_copy = Del(l1_copy, index);
                         index = Index(l2_copy, l2.GetValue());
-                        l2_copy = Dell(l2_copy, index);
+                        l2_copy = Del(l2_copy, index);
                         break;
                     }
                     l2 = l2.GetNext();
@@ -940,7 +963,10 @@ namespace GenericList
         }
         public static Node<int> ReadFromTextFile(string fileName)
         {
-            TextReader reader = File.OpenText(fileName);
+            var directory = Directory.GetCurrentDirectory();
+            string Pdirectory = Directory.GetParent(Directory.GetParent(directory).ToString()).ToString();
+            var path = Path.Combine(Pdirectory, fileName);
+            TextReader reader = File.OpenText(path);
             string line = reader.ReadLine();
             Node<int> head = new Node<int>(int.Parse(line));
             Node<int> tail = head;
