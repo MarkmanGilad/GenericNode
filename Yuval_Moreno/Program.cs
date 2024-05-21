@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Permissions;
 using System.Text;
@@ -14,8 +13,8 @@ namespace Yuval_Moreno
         static void Main(string[] args)
         {
             int[] arr = { 1, 6, -3, 10, 19, 6, 7, 4 };
-            Node<int> lst = CreateList(arr);
-            
+            //Node<int> lst = CreateList(arr);
+
             //PrintList(lst);
             //Console.WriteLine(GetNode(lst, 5));
             //Node<int> lst2 = new Node<int>(3);
@@ -31,7 +30,30 @@ namespace Yuval_Moreno
             //Console.WriteLine(max(lst));
             //Console.WriteLine(Consistent(lst));
             //PrintList(SumOfSubList(lst));
-            Console.WriteLine(isTriplelist(lst));
+            //Console.WriteLine(isTriplelist(lst));
+            //Queue<int> q = createQueue(arr);
+            //Console.WriteLine(q);
+            //Queue<int> q2 = CopyQ(q);
+            //Console.WriteLine("q2: " + q2);
+            //Console.WriteLine("q: " + q);
+            //Del(q, -3);
+            //Console.WriteLine(sort(q));
+
+            
+            //Student st1 = new Student();
+            //st1.SetCity("Nes Ziona");
+            //Student st2 = new Student();
+            //st2.SetCity("Tel Aviv");
+            //st1 = st2;            
+            //Console.WriteLine(st1.GetNumOfStudents());
+            //st1.add();
+            //Console.WriteLine(st2.GetNumOfStudents());
+
+            //Student st3 = new Student("Yovul", "Alon 2","Nes Ziona");
+            //Student st4 = new Student("Gilad");
+
+            LawStudent student = new LawStudent("yovul","first");
+            Console.WriteLine(student.GetName()); 
         }
 
         public static Node<int> GetNode(Node<int> head, int n)
@@ -293,5 +315,91 @@ namespace Yuval_Moreno
             }
             return true;    
         }
+    
+        public static Queue<int> createQueue(int[] arr)
+        {
+            Queue<int> q = new Queue<int>();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                q.Insert(arr[i]);
+            }
+            return q;
+        }
+
+        public static Queue<int> CopyQ(Queue<int> q)
+        {
+            Queue<int> temp = new Queue<int>();
+            Queue<int> copyq = new Queue<int>();
+            while (!q.IsEmpty())
+            {
+                temp.Insert(q.Head());
+                copyq.Insert(q.Remove());
+            }
+            while (!temp.IsEmpty())
+            {
+                q.Insert(temp.Remove());
+            }
+            return copyq;
+        }
+        public static bool isexist(Queue<int> q, int value)
+        {
+            Queue<int> temp = CopyQ(q);
+
+            while (!temp.IsEmpty())
+            {
+                if (temp.Remove() == value)
+                {
+                    return true;
+                }
+             }
+            return false;
+        }
+        public static int min (Queue<int> q)
+        {
+            Queue<int> temp = CopyQ(q);
+            int min = int.MaxValue;
+            while (!temp.IsEmpty())
+            {
+                if (temp.Head() < min)
+                {
+                    min = temp.Head();
+                }
+                temp.Remove();
+            }
+            return min;
+        }
+        public static void Del (Queue<int> q, int value)
+        {
+            Queue<int> temp = new Queue<int>();
+            bool flag = false;
+            while (!q.IsEmpty())
+            {
+                if (q.Head() != value || flag)
+                {
+                    temp.Insert(q.Remove());
+                }
+                else 
+                { 
+                    q.Remove();
+                    flag = true;
+                }
+            }
+            while (!temp.IsEmpty())
+            {
+                q.Insert(temp.Remove());
+            }
+        }
+        public static Queue<int> sort (Queue<int> q)
+        {
+            Queue<int>  temp = new Queue<int> ();
+            while (!q.IsEmpty())
+            {
+                int minValue = min(q);
+                Del(q, minValue);
+                temp.Insert(minValue);
+            }
+            return temp;
+        }
+
     }
 }

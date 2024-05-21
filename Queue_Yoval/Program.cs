@@ -51,5 +51,20 @@ namespace Queue_Yoval
             }
             return exists;
         }
+
+        public static bool TwoSum(Queue<int> q, int x)
+        {
+            while (!q.IsEmpty())
+            {
+                int first = q.Remove();
+                int second = x - first;
+                if (isExists(q, second))
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
     }
 }

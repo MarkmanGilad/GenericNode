@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2FE6A332-620D-4D0B-8F44-507EA7DB8C89}</ProjectGuid>
+    <ProjectGuid>{B3B7325F-576B-4595-BC25-2DC80BD0C5D2}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Yuval_Moreno</RootNamespace>
-    <AssemblyName>Yuval_Moreno</AssemblyName>
+    <RootNamespace>Yahav</RootNamespace>
+    <AssemblyName>Yahav</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,13 +42,12 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Unit4">
-      <HintPath>..\..\..\..\..\..\source\repos\MarkmanGilad\Unit4.dll</HintPath>
+      <HintPath>..\..\..\Unit4\Unit4.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Student.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

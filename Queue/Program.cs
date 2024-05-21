@@ -273,5 +273,20 @@ namespace Queue
 
             
         }
+    
+        public static bool TwoSum (Queue<int> q, int x) 
+        { 
+            while (!q.isEmpty())
+            {
+                int first = q.Remove();
+                int second = x - first;
+                if (isExist1(q, second))
+                {
+                    return true;
+                }
+            }
+            return false;
+            
+        }
     }
 }

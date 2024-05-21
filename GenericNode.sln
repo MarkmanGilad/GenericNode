@@ -46,6 +46,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yuval_Moreno", "Yuval_Moren
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kiryat_Shmona", "Kiryat_Shmona\Kiryat_Shmona.csproj", "{7DE83423-3E2F-44B2-A58B-D0B03F9DBDE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prep2024", "Prep2024\Prep2024.csproj", "{376CE4EC-70E5-423F-A4DE-9EF02398666A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yahav", "Yahav\Yahav.csproj", "{B3B7325F-576B-4595-BC25-2DC80BD0C5D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -132,6 +136,14 @@ Global
 		{7DE83423-3E2F-44B2-A58B-D0B03F9DBDE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DE83423-3E2F-44B2-A58B-D0B03F9DBDE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DE83423-3E2F-44B2-A58B-D0B03F9DBDE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{376CE4EC-70E5-423F-A4DE-9EF02398666A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{376CE4EC-70E5-423F-A4DE-9EF02398666A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{376CE4EC-70E5-423F-A4DE-9EF02398666A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{376CE4EC-70E5-423F-A4DE-9EF02398666A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B7325F-576B-4595-BC25-2DC80BD0C5D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B7325F-576B-4595-BC25-2DC80BD0C5D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B7325F-576B-4595-BC25-2DC80BD0C5D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B7325F-576B-4595-BC25-2DC80BD0C5D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
