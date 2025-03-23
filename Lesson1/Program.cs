@@ -13,6 +13,7 @@ namespace GenericList
         static Random rnd = new Random(10);
         static void Main(string[] args)
         {
+
             int[] arr = { 10, 9, 8 };
             Node<int> head = CreateRandomList(10);
             PrintList(head);
