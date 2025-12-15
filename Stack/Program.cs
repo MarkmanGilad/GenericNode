@@ -55,15 +55,8 @@ namespace Stack
             //Console.WriteLine(Sort2(s1));
         }
 
-        public static Stack<T> CreateStack<T>(T[] arr)
-        {
-            Stack<T> stack = new Stack<T>();
-            for (int i = 0; i < arr.Length; i++)
-            {
-                stack.Push(arr[i]);
-            }
-            return stack;
-        }
+        
+
         public static Stack<T> Copy<T>(Stack<T> st)
         {
             Stack<T> Newstack = new Stack<T>();

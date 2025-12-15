@@ -19,8 +19,8 @@ namespace BinTree
             string fullTree = @"C:\Users\Gilad\Markman Dropbox\Gilad Markman\הוראה\יסודות\GenericNode\BinTree\fullTree.txt";
             string smallTree = @"C:\Users\Gilad\Markman Dropbox\Gilad Markman\הוראה\יסודות\GenericNode\BinTree\smallTree.txt";
             string charTree = @"C:\Users\Gilad\Markman Dropbox\Gilad Markman\הוראה\יסודות\GenericNode\BinTree\TreeChar.txt";
-            BinNode<int> intTree =CreateIntTree(smallTree);
-            BinNode<string> cTree = CreateStringTree(charTree);
+            //BinNode<int> intTree =CreateIntTree(smallTree);
+            //BinNode<string> cTree = CreateStringTree(charTree);
 
             //BinNode<int> intTree = BinTreeUtils.BuildRandomTree(20, 1, 100);
             //TreeCanvas.AddTree(intTree);
@@ -58,10 +58,12 @@ namespace BinTree
             //TreeCanvas.AddTree(cTree);
             //TreeCanvas.TreeDrawPreOrder();
             //Console.WriteLine(WordFromRoot(cTree, "helpu"));
-            TreeCanvas.AddTree(intTree);
-            TreeCanvas.TreeDrawPreOrder();
+            //TreeCanvas.AddTree(intTree);
+            //TreeCanvas.TreeDrawPreOrder();
             //PrintAll(intTree, 0);
-            Console.WriteLine(TreeEqual(intTree)); 
+            //Console.WriteLine(TreeEqual(intTree)); 
+
+            BinTreeMethods();
 
         }
         public static BinNode<int> CreateIntTree(string fileName)
@@ -465,6 +467,362 @@ namespace BinTree
                            tr.HasRight() && right && tr.GetValue() < tr.GetRight().GetValue();
             return current;
 
+        }
+
+
+        /*********************** Tree Print****************************/
+        public static void BinTreeMethods()
+        {
+            string path = GetTreeFilePath("tree_new.txt");
+            BinNode<int> tree = BuildBinaryTree<int>(path);
+            PrintBinaryTree(tree);
+            PrintBinaryTreeColored(tree);
+        }
+
+        /// <summary>
+        /// Builds a binary tree from a text file
+        /// The file format uses indentation (tabs) to represent tree structure:
+        /// - Each line represents a node
+        /// - Indentation level indicates depth
+        /// - "Left:" prefix indicates left child
+        /// - "Right:" prefix indicates right child
+        /// - Empty lines are treated as null nodes
+        /// </summary>
+        /// <typeparam name="T">Type of elements in the tree (must support conversion from string)</typeparam>
+        /// <param name="filePath">Path to the text file containing tree structure</param>
+        /// <returns>Root node of the binary tree, or null if file is empty</returns>
+        public static BinNode<T> BuildBinaryTree<T>(string filePath)
+        {
+            if (!System.IO.File.Exists(filePath))
+                throw new System.IO.FileNotFoundException($"Tree file not found: {filePath}");
+
+            string[] lines = System.IO.File.ReadAllLines(filePath);
+            if (lines.Length == 0)
+                return null;
+
+            int currentLine = 0;
+            return BuildTreeRecursive<T>(lines, ref currentLine, 0);
+        }
+
+        /// <summary>
+        /// Recursively builds the binary tree from file lines
+        /// </summary>
+        private static BinNode<T> BuildTreeRecursive<T>(string[] lines, ref int currentLine, int expectedDepth)
+        {
+            // Skip any empty lines before processing
+            while (currentLine < lines.Length && string.IsNullOrWhiteSpace(lines[currentLine]))
+            {
+                currentLine++;
+            }
+
+            if (currentLine >= lines.Length)
+                return null;
+
+            string line = lines[currentLine];
+
+            // Calculate depth based on leading tabs
+            int depth = 0;
+            while (depth < line.Length && line[depth] == '\t')
+            {
+                depth++;
+            }
+
+            // If depth doesn't match expected, this node belongs to a different level
+            if (depth != expectedDepth)
+                return null;
+
+            // Extract the value (remove tabs and prefixes)
+            string trimmedLine = line.TrimStart('\t');
+            string valueStr = trimmedLine;
+
+            // Remove "Left:" or "Right:" prefix if present
+            if (trimmedLine.StartsWith("Left:"))
+                valueStr = trimmedLine.Substring(5);
+            else if (trimmedLine.StartsWith("Right:"))
+                valueStr = trimmedLine.Substring(6);
+
+            // Convert string to type T
+            T value = ConvertToType<T>(valueStr);
+
+            // Create the node
+            BinNode<T> node = new BinNode<T>(value);
+            currentLine++;
+
+            // Process children in a loop to handle both left and right
+            while (currentLine < lines.Length)
+            {
+                // Skip empty lines
+                while (currentLine < lines.Length && string.IsNullOrWhiteSpace(lines[currentLine]))
+                {
+                    currentLine++;
+                }
+
+                if (currentLine >= lines.Length)
+                    break;
+
+                string nextLine = lines[currentLine];
+
+                // Check depth of next line
+                int nextDepth = 0;
+                while (nextDepth < nextLine.Length && nextLine[nextDepth] == '\t')
+                {
+                    nextDepth++;
+                }
+
+                // If next line is not a direct child, stop processing
+                if (nextDepth != depth + 1)
+                    break;
+
+                string trimmedNextLine = nextLine.TrimStart('\t');
+
+                // Process left child
+                if (trimmedNextLine.StartsWith("Left:"))
+                {
+                    node.SetLeft(BuildTreeRecursive<T>(lines, ref currentLine, depth + 1));
+                }
+                // Process right child
+                else if (trimmedNextLine.StartsWith("Right:"))
+                {
+                    node.SetRight(BuildTreeRecursive<T>(lines, ref currentLine, depth + 1));
+                }
+                else
+                {
+                    // Unknown format, stop processing
+                    break;
+                }
+            }
+
+            return node;
+        }
+
+        /// <summary>
+        /// Converts a string value to the specified type T
+        /// </summary>
+        private static T ConvertToType<T>(string value)
+        {
+            try
+            {
+                // Handle common types
+                Type targetType = typeof(T);
+
+                if (targetType == typeof(string))
+                    return (T)(object)value;
+
+                if (targetType == typeof(int))
+                    return (T)(object)int.Parse(value);
+
+                if (targetType == typeof(double))
+                    return (T)(object)double.Parse(value);
+
+                if (targetType == typeof(float))
+                    return (T)(object)float.Parse(value);
+
+                if (targetType == typeof(bool))
+                    return (T)(object)bool.Parse(value);
+
+                if (targetType == typeof(char) && value.Length == 1)
+                    return (T)(object)value[0];
+
+                // Use Convert.ChangeType for other types
+                return (T)Convert.ChangeType(value, targetType);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Cannot convert '{value}' to type {typeof(T).Name}", ex);
+            }
+        }
+
+
+        /// <summary>
+        /// Gets the tree file path, compatible with both local and VPL
+        /// </summary>
+        public static string GetTreeFilePath(string filePath)
+        {
+            string[] possiblePaths = new[]
+            {
+                filePath,
+                Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName, filePath),
+                Path.Combine("..", filePath),
+                Path.Combine("..", "..", filePath)
+            };
+
+            foreach (var path in possiblePaths)
+            {
+                try
+                {
+                    if (File.Exists(path))
+                        return Path.GetFullPath(path);
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+
+            return filePath;
+        }
+
+
+        /// <summary>
+        /// Prints a binary tree to the console with visual edges
+        /// Uses box-drawing characters for a cleaner appearance
+        /// </summary>
+        /// <typeparam name="T">Type of elements in the tree</typeparam>
+        /// <param name="root">Root node of the tree</param>
+        public static void PrintBinaryTree<T>(BinNode<T> root)
+        {
+            if (root == null)
+            {
+                Console.WriteLine("Tree is empty (null)");
+                return;
+            }
+
+            Console.WriteLine("Binary Tree Structure:");
+            Console.WriteLine("======================");
+            PrintBinaryTreeRecursive(root, "", "", true);
+            Console.WriteLine("======================");
+        }
+
+        /// <summary>
+        /// Recursively prints the tree structure to console with visual edges
+        /// </summary>
+        /// <typeparam name="T">Type of elements in the tree</typeparam>
+        /// <param name="node">Current node being printed</param>
+        /// <param name="indent">Current indentation string</param>
+        /// <param name="pointer">Pointer character (├── or └──)</param>
+        /// <param name="isRoot">Whether this is the root node</param>
+        private static void PrintBinaryTreeRecursive<T>(BinNode<T> node, string indent, string pointer, bool isRoot)
+        {
+            if (node == null)
+                return;
+
+            // Print current node
+            Console.Write(indent);
+            if (!isRoot)
+                Console.Write(pointer);
+            Console.WriteLine(node.GetValue());
+
+            // Prepare indentation for children
+            string childIndent = indent;
+            if (!isRoot)
+            {
+                childIndent += (pointer == "└── " ? "    " : "│   ");
+            }
+
+            // Print left and right children
+            if (node.HasLeft() || node.HasRight())
+            {
+                // Print left child
+                if (node.HasLeft())
+                {
+                    PrintBinaryTreeRecursive(node.GetLeft(), childIndent, "├── ", false);
+                }
+                else if (node.HasRight())
+                {
+                    // Show null left child only if right child exists
+                    Console.WriteLine(childIndent + "├── (null)");
+                }
+
+                // Print right child
+                if (node.HasRight())
+                {
+                    PrintBinaryTreeRecursive(node.GetRight(), childIndent, "└── ", false);
+                }
+                else if (node.HasLeft())
+                {
+                    // Show null right child only if left child exists
+                    Console.WriteLine(childIndent + "└── (null)");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Prints a binary tree to the console with colored output (optional)
+        /// Highlights different levels with colors for better visualization
+        /// </summary>
+        /// <typeparam name="T">Type of elements in the tree</typeparam>
+        /// <param name="root">Root node of the tree</param>
+        /// <param name="useColors">Whether to use colored output</param>
+        public static void PrintBinaryTreeColored<T>(BinNode<T> root, bool useColors = true)
+        {
+            if (root == null)
+            {
+                Console.WriteLine("Tree is empty (null)");
+                return;
+            }
+
+            Console.WriteLine("Binary Tree Structure:");
+            Console.WriteLine("======================");
+            PrintBinaryTreeColoredRecursive(root, "", "", true, 0, useColors);
+            Console.WriteLine("======================");
+        }
+
+        /// <summary>
+        /// Recursively prints the tree with optional color coding by depth
+        /// </summary>
+        private static void PrintBinaryTreeColoredRecursive<T>(BinNode<T> node, string indent, string pointer, bool isRoot, int depth, bool useColors)
+        {
+            if (node == null)
+                return;
+
+            // Color palette for different depths
+            ConsoleColor[] colors = new ConsoleColor[]
+            {
+                ConsoleColor.Cyan,
+                ConsoleColor.Yellow,
+                ConsoleColor.Green,
+                ConsoleColor.Magenta,
+                ConsoleColor.Blue,
+                ConsoleColor.Red
+            };
+
+            // Print current node
+            Console.Write(indent);
+            if (!isRoot)
+                Console.Write(pointer);
+
+            if (useColors)
+            {
+                var originalColor = Console.ForegroundColor;
+                Console.ForegroundColor = colors[depth % colors.Length];
+                Console.WriteLine(node.GetValue());
+                Console.ForegroundColor = originalColor;
+            }
+            else
+            {
+                Console.WriteLine(node.GetValue());
+            }
+
+            // Prepare indentation for children
+            string childIndent = indent;
+            if (!isRoot)
+            {
+                childIndent += (pointer == "└── " ? "    " : "│   ");
+            }
+
+            // Print left and right children
+            if (node.HasLeft() || node.HasRight())
+            {
+                // Print left child
+                if (node.HasLeft())
+                {
+                    PrintBinaryTreeColoredRecursive(node.GetLeft(), childIndent, "├── ", false, depth + 1, useColors);
+                }
+                else if (node.HasRight())
+                {
+                    Console.WriteLine(childIndent + "├── (null)");
+                }
+
+                // Print right child
+                if (node.HasRight())
+                {
+                    PrintBinaryTreeColoredRecursive(node.GetRight(), childIndent, "└── ", false, depth + 1, useColors);
+                }
+                else if (node.HasLeft())
+                {
+                    Console.WriteLine(childIndent + "└── (null)");
+                }
+            }
         }
 
     }

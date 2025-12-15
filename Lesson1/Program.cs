@@ -1133,5 +1133,12 @@ namespace GenericList
         }
     }
 
+    public class poo
+    {
+        public string ToString ()
+        {
+            return "";
+        }
+    }
 
 }
