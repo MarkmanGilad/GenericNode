@@ -5,11 +5,6 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericNode", "GenericNode\GenericNode.csproj", "{BC222D58-E27B-4A5D-A9FA-1511330922CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericList", "Lesson1\GenericList.csproj", "{C80DACF4-14B1-4D27-BB09-8D7CE15AE1B0}"
-	ProjectSection(ProjectDependencies) = postProject
-		{BC222D58-E27B-4A5D-A9FA-1511330922CD} = {BC222D58-E27B-4A5D-A9FA-1511330922CD}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectionDay", "ElectionDay\ElectionDay.csproj", "{D638A13B-FB60-49E7-A24A-12B8916A9843}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hashlama", "Hashlama\Hashlama.csproj", "{73AE2D29-C931-419E-B55E-5A353FF738F7}"
@@ -52,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yahav", "Yahav\Yahav.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListTemplates", "ListTemplates\ListTemplates.csproj", "{A3BE7CEF-659A-4693-B621-E4FCB32E693D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericList", "GenericList\GenericList.csproj", "{C80DACF4-14B1-4D27-BB09-8D7CE15AE1B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,10 +59,6 @@ Global
 		{BC222D58-E27B-4A5D-A9FA-1511330922CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC222D58-E27B-4A5D-A9FA-1511330922CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC222D58-E27B-4A5D-A9FA-1511330922CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C80DACF4-14B1-4D27-BB09-8D7CE15AE1B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C80DACF4-14B1-4D27-BB09-8D7CE15AE1B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C80DACF4-14B1-4D27-BB09-8D7CE15AE1B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C80DACF4-14B1-4D27-BB09-8D7CE15AE1B0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D638A13B-FB60-49E7-A24A-12B8916A9843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D638A13B-FB60-49E7-A24A-12B8916A9843}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D638A13B-FB60-49E7-A24A-12B8916A9843}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -150,6 +143,10 @@ Global
 		{A3BE7CEF-659A-4693-B621-E4FCB32E693D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3BE7CEF-659A-4693-B621-E4FCB32E693D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3BE7CEF-659A-4693-B621-E4FCB32E693D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C80DACF4-14B1-4D27-BB09-8D7CE15AE1B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C80DACF4-14B1-4D27-BB09-8D7CE15AE1B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C80DACF4-14B1-4D27-BB09-8D7CE15AE1B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C80DACF4-14B1-4D27-BB09-8D7CE15AE1B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

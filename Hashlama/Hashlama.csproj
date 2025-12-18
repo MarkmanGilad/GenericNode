@@ -54,10 +54,6 @@
       <Project>{bc222d58-e27b-4a5d-a9fa-1511330922cd}</Project>
       <Name>GenericNode</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lesson1\GenericList.csproj">
-      <Project>{c80dacf4-14b1-4d27-bb09-8d7ce15ae1b0}</Project>
-      <Name>GenericList</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
