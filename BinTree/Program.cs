@@ -14,6 +14,7 @@ namespace BinTree
     {
         static void Main(string[] args)
         {
+            
             //createIntTree();
             string tree = @"C:\Users\Gilad\Markman Dropbox\Gilad Markman\הוראה\יסודות\GenericNode\BinTree\tree.txt";
             string fullTree = @"C:\Users\Gilad\Markman Dropbox\Gilad Markman\הוראה\יסודות\GenericNode\BinTree\fullTree.txt";
